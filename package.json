@@ -10,9 +10,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "verify:build": "node scripts/verify-build.mjs",
-    "test": "playwright test",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "test": "playwright test"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.89.0",
@@ -26,7 +24,6 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.0.0",
-    "gh-pages": "^6.3.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }

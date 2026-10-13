@@ -1,5 +1,9 @@
 import { expect, test } from '@playwright/test';
-import { writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+
+// CI evidence must not overwrite the approved visual documentation.
+const artifactDirectory = process.env.PLAYWRIGHT_ARTIFACT_DIR || 'docs/v3';
 
 const routes = ['/', '/sobre', '/solucoes', '/dev', '/saude', '/store', '/portfolio', '/contato', '/privacidade', '/dev/produtos/hotspot-pix', '/dev/produtos/questionarios', '/dev/produtos/clinicas', '/login', '/admin'];
 for (const width of [320, 390, 768, 1440, 1920]) {
@@ -106,8 +110,8 @@ test('capturas V3 desktop, tablet e celular', async ({ page }) => {
       for (const image of await page.locator('img').all()) await image.scrollIntoViewIfNeeded();
       await expect.poll(() => page.locator('img').evaluateAll(images => images.every(i => (i as HTMLImageElement).complete && (i as HTMLImageElement).naturalWidth > 0))).toBeTruthy();
       await page.evaluate(() => window.scrollTo(0, 0));
-      await page.screenshot({ path: `docs/v3/after/${route || 'home'}-${name}-viewport.png` });
-      await page.screenshot({ path: `docs/v3/after/${route || 'home'}-${name}.png`, fullPage: true });
+      await page.screenshot({ path: path.join(artifactDirectory, 'after', `${route || 'home'}-${name}-viewport.png`) });
+      await page.screenshot({ path: path.join(artifactDirectory, 'after', `${route || 'home'}-${name}.png`), fullPage: true });
     }
   }
 });
@@ -159,5 +163,6 @@ test('diagnóstico local de carregamento e estabilidade', async ({ page }) => {
     measurements.push({ name, viewport: `${width}x${height}`, ...await page.evaluate(() => (window as any).__visualMetrics) });
     await cdp.detach();
   }
-  writeFileSync('docs/v3/medicoes-locais.json', JSON.stringify({ note: 'Uma navegação por cenário no Chromium local, cache desabilitado. Mobile: 1,6 Mbps, latência 150 ms, CPU 4x. Não equivale a Core Web Vitals de campo. INP não medido.', measurements }, null, 2));
+  mkdirSync(artifactDirectory, { recursive: true });
+  writeFileSync(path.join(artifactDirectory, 'medicoes-locais.json'), JSON.stringify({ note: 'Uma navegação por cenário no Chromium local, cache desabilitado. Mobile: 1,6 Mbps, latência 150 ms, CPU 4x. Não equivale a Core Web Vitals de campo. INP não medido.', measurements }, null, 2));
 });

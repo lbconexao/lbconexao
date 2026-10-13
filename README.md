@@ -5,7 +5,7 @@ Exatamente três áreas: **DEV**, **Saúde** e **Store**. Hotspot PIX, plataform
 
 ## Executar localmente
 
-Recomendado: Node.js 22.12+ (validação feita com Node 24).
+Recomendado: Node.js 24, definido em `.node-version` e utilizado pelo workflow preparado.
 
 ```powershell
 npm ci
@@ -44,6 +44,7 @@ As rotas `/#/login` e `/#/admin` estão preservadas como telas de indisponibilid
 
 ## Revisar antes de publicar
 
+- [Migração para main e GitHub Actions — consolidação local e próximos passos](docs/MIGRACAO_GITHUB_PAGES.md)
 - [Revisão para GitHub Desktop — 13/10/2026 e texto do commit](docs/REVISAO_GITHUB_DESKTOP.md)
 - [Refinamento visual V3 — relatório](docs/v3/RELATORIO_V3.md)
 - [V3 — capturas desktop, tablet e celular / comparação com V2](docs/v3/README.md)
@@ -54,8 +55,10 @@ As rotas `/#/login` e `/#/admin` estão preservadas como telas de indisponibilid
 - [Auditoria preliminar de serviços/CNAEs](docs/AUDITORIA_SERVICOS_CNAES.md)
 - [Identidade visual e otimização](docs/IDENTIDADE_VISUAL.md)
 
-Refinamento atual na branch local `redesign/cinematic-v3`, criada a partir de `redesign/premium-v2`, preservando o trabalho existente. **Não houve push, merge ou deploy.**
+A `main` local já foi consolidada até o commit `54bed39`, preservando o redesign V2/V3 e todo o histórico. Ela está selecionada e acompanha `origin/main`. As configurações de migração permanecem como alterações locais para o proprietário fazer Commit e Push pelo GitHub Desktop. Não foi criado novo commit nem feito push ou deploy pelo assistente.
 
-O site público atual é https://lbconexao.github.io/lbconexao/. Os arquivos públicos correspondem à referência `origin/gh-pages` na raiz; a configuração administrativa do Pages ainda deve ser conferida em Settings → Pages. Preserve `HashRouter` e o caminho base do Vite.
+O site público atual é https://lbconexao.github.io/lbconexao/. A consulta à API confirmou Source ainda em `legacy`, branch `gh-pages`, raiz `/`. O ambiente `github-pages` já permite `main`. Falta o proprietário selecionar **Settings → Pages → Source → GitHub Actions**, antes do primeiro Push da migração. O acesso disponível ao assistente é somente de leitura, sem permissão para alterar essa configuração. Preserve `HashRouter` e o caminho base do Vite.
 
-Após autorização explícita, revisar as pendências documentadas, realizar os checks, aprovar o diff e preparar a publicação somente do conteúdo de `dist/`. O script legado `npm run deploy` realiza escrita remota e **não deve ser executado como teste**. Há alertas pendentes na dependência de publicação, documentados na auditoria técnica. O histórico da branch antiga contém arquivos de ambiente e dependências que devem ser excluídos do conteúdo publicado em uma atualização autorizada.
+O único mecanismo de produção preparado é `.github/workflows/deploy-pages.yml`. Após a consolidação autorizada e a seleção manual de **Source: GitHub Actions**, pushes na main executarão instalação, typecheck, build, verificação do artefato, testes e publicação exclusiva de `dist/`. A execução manual também está limitada à main. O script e a dependência legados `gh-pages` foram removidos; não executar `npm run deploy` nem copiar arquivos manualmente para gh-pages.
+
+Na rotina futura, usar main para alterações comuns pelo GitHub Desktop, sem criar uma branch a cada atualização. Validar e revisar antes do Commit + Push. A branch gh-pages antiga ficará preservada, mas não será a origem do novo fluxo. Consulte o plano de migração para a ordem correta de ativação e os limites da validação local.

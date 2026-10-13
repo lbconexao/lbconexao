@@ -1,0 +1,4 @@
+# Keep workflow and Node version files consistent on Windows and Linux.
+*.yml text eol=lf
+*.yaml text eol=lf
+.node-version text eol=lf
