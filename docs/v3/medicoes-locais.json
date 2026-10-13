@@ -1,0 +1,17 @@
+{
+  "note": "Uma navegação por cenário no Chromium local, cache desabilitado. Mobile: 1,6 Mbps, latência 150 ms, CPU 4x. Não equivale a Core Web Vitals de campo. INP não medido.",
+  "measurements": [
+    {
+      "name": "desktop-local",
+      "viewport": "1440x900",
+      "lcpMs": 716,
+      "cls": 0
+    },
+    {
+      "name": "mobile-rede-simulada",
+      "viewport": "390x844",
+      "lcpMs": 2852,
+      "cls": 0
+    }
+  ]
+}

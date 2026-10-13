@@ -1,83 +1,39 @@
-
-import React from 'react';
 import { Link } from 'react-router-dom';
-import SharedHeader from '../components/SharedHeader';
-import SharedFooter from '../components/SharedFooter';
-import { IMAGES } from '../constants';
+import Cinema from '../components/Cinema';
+import Brand from '../components/Brand';
+import Projects from '../components/Projects';
+import { Arrow, ContactCTA, FAQ, Process, SectionHeading } from '../components/Primitives';
+import { DivisionScene, SceneImage } from '../components/Scene';
+import { divisions } from '../site.config';
 
-const Hub: React.FC = () => {
-  return (
-    <div id="top" className="flex flex-col min-h-screen scroll-smooth">
-      <SharedHeader type="hub" />
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <div
-          className="relative min-h-[500px] md:min-h-[600px] flex items-center justify-center bg-cover bg-center"
-          style={{
-            backgroundImage: `linear-gradient(rgba(31, 68, 117, 0.85) 0%, rgba(19, 24, 31, 0.9) 100%), url("${IMAGES.HUB_BG}")`
-          }}
-        >
-          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fadeIn">
-            <h1 className="text-white text-5xl md:text-7xl font-black mb-6 tracking-tight">LB Conexão</h1>
-            <p className="text-slate-200 text-lg md:text-2xl font-light leading-relaxed max-w-2xl mx-auto">
-              Saúde, Tecnologia e Comércio Conectados em um único ecossistema digital inteligente.
-            </p>
-          </div>
+export default function Hub() {
+  return <>
+    <section className="home-hero cinematic-home">
+      <div className="scene-media" data-parallax><SceneImage scene="conexoes" priority /></div>
+      <div className="scene-overlay" />
+      <div className="container hero-content">
+        <p className="eyebrow hero-enter"><span className="live-dot" /> UM ECOSSISTEMA. NOVAS POSSIBILIDADES.</p>
+        <h1 className="hero-enter">Conectamos ideias.<br /><span>Desenvolvemos soluções.</span></h1>
+        <p className="hero-description hero-enter">Tecnologia, educação em saúde e oportunidades digitais integradas em um único ecossistema.</p>
+        <div className="hero-actions hero-enter">
+          <Link className="button primary" to="/solucoes">Explorar soluções <Arrow diagonal /></Link>
+          <Link className="button glass" to="/portfolio">Conhecer projetos <Arrow /></Link>
         </div>
-
-        {/* Division Cards */}
-        <div className="max-w-[1200px] mx-auto px-4 -mt-16 relative z-20 pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Link to="/saude" className="group bg-white p-8 rounded-2xl shadow-xl border-t-4 border-health hover:-translate-y-2 transition-all duration-300 text-center flex flex-col items-center gap-4">
-              <span className="material-symbols-outlined text-5xl text-health">health_and_safety</span>
-              <h3 className="text-2xl font-bold text-slate-900 group-hover:text-health transition-colors">LB Conexão Saúde</h3>
-              <p className="text-slate-500 text-sm">Capacitação, telemedicina e gestão para o bem-estar.</p>
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mt-auto">Acessar Portal</span>
-            </Link>
-
-            <Link to="/dev" className="group bg-white p-8 rounded-2xl shadow-xl border-t-4 border-primary hover:-translate-y-2 transition-all duration-300 text-center flex flex-col items-center gap-4">
-              <span className="material-symbols-outlined text-5xl text-primary">terminal</span>
-              <h3 className="text-2xl font-bold text-slate-900 group-hover:text-primary transition-colors">LB Conexão Dev</h3>
-              <p className="text-slate-500 text-sm">Soluções digitais, APIs e inovação tecnológica sob medida.</p>
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mt-auto">Acessar Hub</span>
-            </Link>
-
-            <Link to="/store" className="group bg-white p-8 rounded-2xl shadow-xl border-t-4 border-store hover:-translate-y-2 transition-all duration-300 text-center flex flex-col items-center gap-4">
-              <span className="material-symbols-outlined text-5xl text-store">storefront</span>
-              <h3 className="text-2xl font-bold text-slate-900 group-hover:text-store transition-colors">LB Conexão Store</h3>
-              <p className="text-slate-500 text-sm">Marketplace exclusivo de equipamentos e serviços digitais.</p>
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mt-auto">Acessar Loja</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Info Section */}
-        <section className="py-20 bg-slate-50">
-          <div className="max-w-[1100px] mx-auto px-4 text-center">
-            <h2 className="text-primary text-3xl md:text-4xl font-black mb-12">Nossas Conexões</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              <div className="flex flex-col gap-4">
-                <div className="h-48 rounded-xl bg-cover bg-center shadow-md mb-2" style={{ backgroundImage: `url("${IMAGES.HEALTH_POST_1}")` }}></div>
-                <h4 className="text-xl font-bold text-slate-900">Saúde Integrada</h4>
-                <p className="text-slate-600 text-sm">Educação e tecnologia para transformar o atendimento médico.</p>
-              </div>
-              <div className="flex flex-col gap-4">
-                <div className="h-48 rounded-xl bg-cover bg-center shadow-md mb-2" style={{ backgroundImage: `url("${IMAGES.DEV_BANNER}")` }}></div>
-                <h4 className="text-xl font-bold text-slate-900">Inovação Dev</h4>
-                <p className="text-slate-600 text-sm">Construindo as infraestruturas do amanhã.</p>
-              </div>
-              <div className="flex flex-col gap-4">
-                <div className="h-48 rounded-xl bg-cover bg-center shadow-md mb-2" style={{ backgroundImage: `url("${IMAGES.STETHOSCOPE}")` }}></div>
-                <h4 className="text-xl font-bold text-slate-900">Store Especializada</h4>
-                <p className="text-slate-600 text-sm">Os melhores produtos com garantia LB Conexão.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <SharedFooter type="hub" />
-    </div>
-  );
-};
-
-export default Hub;
+        <Link className="hero-budget hero-enter" to="/contato">Solicitar orçamento <Arrow diagonal /></Link>
+      </div>
+      <div className="hero-bottom container"><span>TECNOLOGIA · CONHECIMENTO · OPORTUNIDADES</span><button onClick={() => document.getElementById('ecossistema')?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}>Conheça o ecossistema <span aria-hidden="true">↓</span></button></div>
+      <span className="scene-credit">Conexões urbanas · Fotografia ilustrativa</span>
+    </section>
+    <section className="ecosystem-intro section container" id="ecossistema">
+      <div className="intro-heading" data-reveal-group><p className="eyebrow" data-reveal>ESSÊNCIAS DIFERENTES. CONEXÕES REAIS.</p><h2 data-reveal>Três áreas.<br /><em>Um mesmo propósito.</em></h2><p data-reveal>Conectar pessoas, conhecimento e tecnologia para transformar necessidades em novas possibilidades.</p></div>
+      <div className="brand-lineup">{divisions.map(d => <Link key={d.id} to={`/${d.id}`} className={`brand-lineup-item division-${d.id}`} data-reveal><Brand division={d.id} /><span>{d.label}<Arrow diagonal /></span></Link>)}</div>
+    </section>
+    <DivisionScene division="dev" />
+    <section className="editorial-break section container"><SectionHeading eyebrow="DA IDEIA AO QUE VEM DEPOIS" title="Soluções feitas para o seu próximo passo." text="Desenvolvimento personalizado, conhecimento que se conecta e atendimento consultivo. Cada projeto começa com uma conversa sobre o que realmente importa." /><Link className="text-link" to="/solucoes">Explorar nossas soluções <Arrow diagonal /></Link></section>
+    <DivisionScene division="saude" />
+    <DivisionScene division="store" />
+    <Projects compact />
+    <section className="brand-story"><div className="container brand-story-grid"><div data-reveal-group><p className="eyebrow" data-reveal>CONEXÕES COM PROPÓSITO</p><h2 data-reveal>O futuro ganha forma quando a gente se conecta.</h2><p data-reveal>Três áreas que compartilham uma forma de pensar: ouvir, colaborar e construir possibilidades.</p><Link className="text-link" to="/sobre" data-reveal>Conheça a LB Conexão <Arrow diagonal /></Link></div><div className="brand-film"><Cinema /></div></div></section>
+    <Process /><FAQ /><ContactCTA />
+  </>;
+}
